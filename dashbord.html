@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    
+  #grad {
+  height:fit-content;
+   
+  background-image: linear-gradient(90deg, rgb(252, 252, 252), rgb(233, 126, 25));
+}
+
+</style>
+<body id="grad" style="text-align:center;">
+    <img src="bobimg.png" width="200" height="130"><br><br>
+   <center><div>
+
+    <div><input type="text" id="bal" disabled value="10000" size="10px" style="size:'10px'">₹</div><br>
+    <div><button onclick="debit()">Debit</button>
+        <button onclick="credit()">Credit</button>
+        <button onclick="transHistory()">Transaction History</button>
+    
+    <button onclick="signout()">signout</button></div>
+    <p id="msg"> </p>
+    <p id="warn"> </p>
+    <p id="tran"></p>
+</div>
+</center>
+    <script>
+
+        let transHistorylist=[]
+
+        let date= new Date().toLocaleDateString()
+
+    function debit(){
+        document.getElementById('msg').innerHTML=`<b>Debit Amount:-</b>  <input type='text' id="amount"><button onclick="changedebit()" ><b>Confirm</b></button>`
+        
+}
+function credit(){
+        document.getElementById('msg').innerHTML=`<b>Credit Amount:- </b></label><input type='text' id="amount"><button onclick="changecredit()" ><b>Confirm</b></button>`
+        
+}
+
+
+function changedebit(){
+    let balance= parseInt(document.getElementById('bal').value);
+    let amount=parseInt(document.getElementById('amount').value);
+    if(amount>balance)
+    {
+        alert("Insufficient Balance")
+    }
+    else{
+        document.getElementById('bal').value=balance-amount;
+        document.getElementById('msg').innerHTML='<b>Transaction Successfull !'
+        transHistorylist+="₹"+amount+"         " +date+"Debit <br>"
+    }
+}
+function changecredit(){
+    let balance=parseInt(document.getElementById('bal').value);
+    let amount=parseInt(document.getElementById('amount').value);
+   
+   if(amount>0){
+    document.getElementById('bal').value=balance+amount;
+        document.getElementById('msg').innerHTML='<b>Deposit Successfull !'
+        transHistorylist+="₹"+amount+"        "+date+"Credit <br>"
+       
+   }
+    else{
+        alert("invalid amount")
+        }
+}
+
+function transHistory(){
+    document.getElementById("tran").innerHTML=transHistorylist
+
+
+}
+
+
+function signout(){
+    window.location.href="file:///C:/Users/Dell/Desktop/javascript/new_projects/ATM/main.html"
+
+}
+</script>
+</body>
+</html>
